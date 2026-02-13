@@ -1,0 +1,1 @@
+This is a web-based Physics Learning Management System built using Python, Streamlit, and SQLite. It demonstrates database operations such as creating topics, assignments, storing marks, and viewing records.
