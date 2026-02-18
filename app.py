@@ -48,25 +48,32 @@ elif choice == "View Topics & Simulate":
         selected_topic = st.selectbox("Choose Topic", topic_list)
 
         # -------- NEWTON'S FIRST LAW -------- #
-        if selected_topic.lower() == "newton's first law":
-            st.write("Simulation: Object moving at constant velocity (Inertia)")
+        import time
 
+        if selected_topic.lower() == "newton's first law":
+           st.write("Simulation: Object moving at constant velocity (Inertia)")
+
+           friction = st.checkbox("Add Friction")
+
+           position = 0
+           velocity = 0.1
+
+           plot_area = st.empty()
+
+           for i in range(200):
             fig, ax = plt.subplots()
             ax.set_xlim(0, 10)
             ax.set_ylim(0, 1)
-            ball, = ax.plot([], [], 'o')
 
-            def init():
-                ball.set_data([], [])
-                return ball,
+            ax.plot(position, 0.5, 'o', markersize=15)
 
-            def update(frame):
-                ball.set_data(frame * 0.1, 0.5)
-                return ball,
+            if friction:
+             velocity *= 0.98  # gradual slowing
+            position += velocity
 
-            ani = FuncAnimation(fig, update, frames=100, init_func=init, blit=True)
+            plot_area.pyplot(fig)
+            time.sleep(0.03)
 
-            st.pyplot(fig)
 
         # -------- NEWTON'S SECOND LAW -------- #
         elif selected_topic.lower() == "newton's second law":
